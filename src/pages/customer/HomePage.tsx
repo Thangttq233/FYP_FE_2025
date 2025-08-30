@@ -1,15 +1,12 @@
 import {
   ChevronRight,
-  ChevronLeft,
   ShoppingCart,
-  Star,
   Truck,
   RefreshCw,
   ShieldCheck,
   Phone,
 } from "lucide-react";
 
-// Dữ liệu mẫu cho sản phẩm
 const sampleProducts = [
   {
     id: 1,
@@ -47,10 +44,8 @@ const sampleProducts = [
   },
 ];
 
-// Component Card sản phẩm - ĐÃ CẬP NHẬT
 const ProductCard = ({ product }: { product: (typeof sampleProducts)[0] }) => (
   <div className="group">
-    {/* Bọc ảnh trong một div có tỷ lệ khung hình cố định */}
     <div className="relative overflow-hidden aspect-[3/4] bg-gray-100 rounded-md">
       <img
         src={product.imageUrl}
@@ -83,7 +78,6 @@ const ProductCard = ({ product }: { product: (typeof sampleProducts)[0] }) => (
   </div>
 );
 
-// Component Section tiêu đề
 const SectionHeader = ({
   title,
   viewMoreLink = "#",
@@ -102,7 +96,6 @@ const SectionHeader = ({
   </div>
 );
 
-// Component Hero Banner - ĐÃ CẬP NHẬT
 const HeroSection = () => (
   <section className="container mx-auto px-4 my-8">
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -133,7 +126,6 @@ const HeroSection = () => (
   </section>
 );
 
-// Component Chính sách
 const PolicySection = () => (
   <section className="bg-gray-100 py-8">
     <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">

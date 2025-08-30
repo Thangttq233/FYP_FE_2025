@@ -37,7 +37,7 @@ export interface AuthResponseDto {
     email: string;
     userName: string;
     fullName: string;
-    roles: UserRole;
+    roles: UserRole[];
     token: string;
     expiration: string;
     isSuccess: boolean;

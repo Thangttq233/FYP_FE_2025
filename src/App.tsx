@@ -1,14 +1,12 @@
-// src/App.tsx
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import ProtectedRoute from "@/routes/ProtectedRoute";
-import LoginPage from "@/pages/auth/Login";
+import LoginForm from "@/pages/auth/LoginForm";
 import NotFound from "@/pages/auth/NotFound";
 import HomePage from "@/pages/customer/HomePage";
-// Layouts
+import Profile from "@/pages/customer/Profile";
 import CustomerLayout from "@/pages/customer/CustomerLayout";
 import ManageLayout from "@/pages/manage/ManageLayout";
 
-// Pages
 const AdminDashboard = () => <div>Admin Dashboard</div>;
 
 const router = createBrowserRouter([
@@ -24,20 +22,27 @@ const router = createBrowserRouter([
           { index: true, element: <HomePage /> },
           {
             path: "login",
-            element: <LoginPage />,
+            element: <LoginForm />,
+          },
+          {
+            path: "profile",
+            element: (
+              <ProtectedRoute allowedRoles={["Customer"]}>
+                <Profile />
+              </ProtectedRoute>
+            ),
           },
         ],
       },
       {
         path: "admin",
         element: (
-          <ProtectedRoute allowedRoles={["admin"]}>
+          <ProtectedRoute allowedRoles={["Admin"]}>
             <ManageLayout />
           </ProtectedRoute>
         ),
         children: [{ index: true, element: <AdminDashboard /> }],
       },
-
       {
         path: "*",
         element: <NotFound />,
@@ -49,4 +54,5 @@ const router = createBrowserRouter([
 function App() {
   return <RouterProvider router={router} />;
 }
+
 export default App;

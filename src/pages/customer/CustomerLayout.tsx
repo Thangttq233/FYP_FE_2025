@@ -7,7 +7,7 @@ const CustomerLayout = () => {
     <div>
       <main className="p-4">
         <Navbar />
-        <Outlet /> {/* render page con */}
+        <Outlet /> 
         <Footer />
       </main>
     </div>

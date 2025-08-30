@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Search,
   User,
@@ -10,19 +10,20 @@ import {
   MapPin,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "@/stores/authStore";
 
 const NavItem = ({
-  children,
+  label,
   hasDropdown = false,
 }: {
-  children: React.ReactNode;
+  label: string;
   hasDropdown?: boolean;
 }) => (
   <a
     href="#"
     className="flex items-center text-gray-800 hover:text-blue-600 transition-colors duration-300 group"
   >
-    {children}
+    {label}
     {hasDropdown && (
       <ChevronDown className="ml-1 h-4 w-4 transform transition-transform duration-300 group-hover:rotate-180" />
     )}
@@ -31,10 +32,26 @@ const NavItem = ({
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const { auth } = useAuthStore();
+
+  useEffect(() => {
+    setIsLogin(auth !== null);
+  }, [auth]);
+
+  const navItems = [
+    { label: "HÀNG MỚI", hasDropdown: true },
+    { label: "ÁO NAM", hasDropdown: true },
+    { label: "QUẦN NAM", hasDropdown: true },
+    { label: "GIÀY DÉP", hasDropdown: true },
+    { label: "PHỤ KIỆN", hasDropdown: true },
+    { label: "QUÀ TẶNG", hasDropdown: true },
+    { label: "X-TECH" },
+    { label: "ƯU ĐÃI" },
+  ];
 
   return (
     <header className="bg-white shadow-md">
-      {/* Top Bar */}
       <div className="bg-gray-900 text-white text-xs py-2">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-4">
@@ -61,27 +78,22 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Main Navigation */}
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#"></a>
+            <a href="#">LOGO</a>
           </div>
 
-          {/* Desktop Navigation Links */}
           <div className="hidden lg:flex lg:items-center lg:space-x-8 font-semibold">
-            <NavItem hasDropdown>HÀNG MỚI</NavItem>
-            <NavItem hasDropdown>ÁO NAM</NavItem>
-            <NavItem hasDropdown>QUẦN NAM</NavItem>
-            <NavItem hasDropdown>GIÀY DÉP</NavItem>
-            <NavItem hasDropdown>PHỤ KIỆN</NavItem>
-            <NavItem hasDropdown>QUÀ TẶNG</NavItem>
-            <NavItem>X-TECH</NavItem>
-            <NavItem>ƯU ĐÃI</NavItem>
+            {navItems.map((item, idx) => (
+              <NavItem
+                key={idx}
+                label={item.label}
+                hasDropdown={item.hasDropdown}
+              />
+            ))}
           </div>
 
-          {/* Icons and Search */}
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center border rounded-full px-3 py-1.5">
               <input
@@ -93,7 +105,7 @@ const Navbar = () => {
             </div>
 
             <Link
-              to="/login"
+              to={isLogin ? "/profile" : "/login"}
               className="h-6 w-6 text-gray-700 cursor-pointer hover:text-blue-600"
             >
               <User />
@@ -106,7 +118,6 @@ const Navbar = () => {
               </span>
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="lg:hidden">
               <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 {isMenuOpen ? (
@@ -120,7 +131,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden bg-white border-t">
           <div className="px-4 py-2">
@@ -132,51 +142,15 @@ const Navbar = () => {
               />
               <Search className="h-5 w-5 text-gray-500 cursor-pointer" />
             </div>
-            <a
-              href="#"
-              className="block py-2 text-gray-800 font-semibold border-b"
-            >
-              HÀNG MỚI
-            </a>
-            <a
-              href="#"
-              className="block py-2 text-gray-800 font-semibold border-b"
-            >
-              ÁO NAM
-            </a>
-            <a
-              href="#"
-              className="block py-2 text-gray-800 font-semibold border-b"
-            >
-              QUẦN NAM
-            </a>
-            <a
-              href="#"
-              className="block py-2 text-gray-800 font-semibold border-b"
-            >
-              GIÀY DÉP
-            </a>
-            <a
-              href="#"
-              className="block py-2 text-gray-800 font-semibold border-b"
-            >
-              PHỤ KIỆN
-            </a>
-            <a
-              href="#"
-              className="block py-2 text-gray-800 font-semibold border-b"
-            >
-              QUÀ TẶNG
-            </a>
-            <a
-              href="#"
-              className="block py-2 text-gray-800 font-semibold border-b"
-            >
-              X-TECH
-            </a>
-            <a href="#" className="block py-2 text-gray-800 font-semibold">
-              ƯU ĐÃI
-            </a>
+            {navItems.map((item, idx) => (
+              <a
+                key={idx}
+                href="#"
+                className="block py-2 text-gray-800 font-semibold border-b"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
         </div>
       )}

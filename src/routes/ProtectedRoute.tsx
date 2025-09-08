@@ -10,13 +10,13 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ allowedRoles, children }: ProtectedRouteProps) => {
-  const user = useAuthStore.getState().auth as AuthResponseDto;
+  const user = useAuthStore((state) => state.auth) as AuthResponseDto;
 
   if (!user) {
     return <Navigate to="/login" replace />;
   }
-  const hasPermission = user.roles.some((roles) =>
-    allowedRoles.includes(roles)
+  const hasPermission = user.roles.some((role) =>
+    allowedRoles.includes(role)
   );
   if (!hasPermission) {
     return <Navigate to="/" replace />;

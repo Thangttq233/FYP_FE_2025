@@ -6,8 +6,14 @@ import HomePage from "@/pages/customer/HomePage";
 import Profile from "@/pages/customer/Profile";
 import CustomerLayout from "@/pages/customer/CustomerLayout";
 import ManageLayout from "@/pages/manage/ManageLayout";
-
-const AdminDashboard = () => <div>Admin Dashboard</div>;
+import AdminDashboard from "./pages/manage/admin/AdminDashboard";
+import AdminProduct from "./pages/manage/admin/AdminProducts";
+import AdminCategories from "./pages/manage/admin/AdminCategories";
+import AdminOrders from "./pages/manage/admin/AdminOrders";
+import AdminCarts from "./pages/manage/admin/AdminCarts";
+import AdminPayments from "./pages/manage/admin/AdminPayments";
+import AdminChatting from "./pages/manage/admin/AdminChatting";
+import AdminUsers from "./pages/manage/admin/AdminUsers";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +47,44 @@ const router = createBrowserRouter([
             <ManageLayout />
           </ProtectedRoute>
         ),
-        children: [{ index: true, element: <AdminDashboard /> }],
+        children: [
+          {
+            index: true,
+            element: <AdminDashboard />,
+          },
+          {
+            path: "dashboard",
+            element: <AdminDashboard />,
+          },
+          {
+            path: "products",
+            element: <AdminProduct />,
+          },
+          {
+            path: "categories",
+            element: <AdminCategories />,
+          },
+          {
+            path: "orders",
+            element: <AdminOrders />,
+          },
+          {
+            path: "carts",
+            element: <AdminCarts />,
+          },
+          {
+            path: "payments",
+            element: <AdminPayments />,
+          },
+          {
+            path: "chatting",
+            element: <AdminChatting />,
+          },
+          {
+            path: "users",
+            element: <AdminUsers />,
+          },
+        ],
       },
       {
         path: "*",

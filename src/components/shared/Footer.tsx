@@ -4,7 +4,6 @@ const Footer = () => {
   return (
     <footer className="bg-black text-gray-300 mt-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6 py-12">
-        {/* Logo + Description */}
         <div>
           <h2 className="text-2xl font-bold text-white mb-4">4MEN</h2>
           <p className="text-sm leading-6">
@@ -13,7 +12,6 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Links */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Hỗ Trợ</h3>
           <ul className="space-y-2 text-sm">
@@ -40,7 +38,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Customer care */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Chăm Sóc KH</h3>
           <ul className="space-y-2 text-sm">
@@ -60,7 +57,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Newsletter */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">
             Đăng ký nhận tin
